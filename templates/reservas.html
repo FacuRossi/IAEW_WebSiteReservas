@@ -1,0 +1,24 @@
+<!-- about.html -->
+<div class="container">
+	<h1>Reservas Realizadas</h1>
+	<table class="table table-hover table-responsive">
+		<thead>
+			<tr>
+				<th>Fecha</th>
+				<th>Cliente</th>
+				<th>Vendedor</th>
+				<th>Precio</th>
+				<th>Codigo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="reserva in reservas">
+				<td>{{reserva.fechaDeReserva}}</td>
+				<td>{{reserva.cliente.nombre + " " + reserva.cliente.apellido}}</td>
+				<td>{{reserva.vendedor.nombre + " " + reserva.vendedor.apellido}}</td>
+				<td>{{reserva.precioVenta}}</td>
+				<td>{{reserva.codigoDeReserva}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
