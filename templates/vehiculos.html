@@ -1,6 +1,42 @@
 <div class="container">
 	<h1>Vehiculos Disponibles</h1>
-	<div class="list-group" ng-repeat="vehiculo in vehiculos">
-		<a href="#" class="list-group-item">{{vehiculo.nombre}}</a>
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="clientSelect" ><h4>Clientes:</h4></label>
+			<div class="col-sm-5">	
+				<select class="form-control" name="clientSelect" id="clientSelect" ng-model="clientSelected">
+					<option ng-repeat="cliente in clientes"  value="{{cliente.id}}">{{cliente.nombre + " " + cliente.apellido}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="paisSelect"><h4>Paises:</h4></label>
+			<div class="col-sm-5">
+				<select class="form-control" name="paisSelect" id="paisSelect" ng-model="paisSelected" ng-change="cargarCiudades()">
+					<option ng-repeat="pais in paises"  value="{{pais.id}}">{{pais.nombre.value}}</option>
+				</select>	
+			</div>
+		</div>
+		<div ng-if="paisSelected != undefined">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="ciudadSelect"><h4>Ciudades:</h4></label>
+				<div class="col-sm-5">
+					<select class="form-control" name="ciudadSelect" id="ciudadSelect" ng-model="ciudadSelected" ng-change="cargarVehiculos()">
+						<option id="idCiudad" ng-repeat="ciudad in ciudades"  value="{{ciudad.id}}">{{ciudad.nombre.value}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div ng-if="ciudad != undefined">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="vehiculoSelect"><h4>Vehiculos:</h4></label>
+				<div class="col-sm-5">
+					<select class="form-control" name="vehiculoSelect" id="vehiculoSelect" ng-model="vehiculoSelected">
+						<option ng-repeat="vehiculo in vehiculos"  value="{{vehiculo.vehiculoCiudadId}}">{{vehiculo.marca.value}}</option>
+					</select>	
+				</div>
+			</div>
+		</form>
 	</div>
+
 </div>

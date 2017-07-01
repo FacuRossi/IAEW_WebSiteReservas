@@ -13,12 +13,34 @@ angular.module('webSiteReservasApp')
 })
 
 .controller('vehiculosCtrl', function($scope, vehiculosSvc) {
-	function cargarVehiculos(){
-		return vehiculosSvc.getVehiculos().then(function(vehiculos){
+	$scope.clientSelected;
+	$scope.paisSelected;
+	$scope.vehiculosSelected;
+	function cargarClientes(){
+		return vehiculosSvc.getClientes().then(function(clientes){
+			$scope.clientes =clientes;
+		});
+	};
+	function cargarPaises(){
+		return vehiculosSvc.getPaises().then(function(paises){
+			$scope.paises =paises;
+		});
+	};
+	$scope.cargarCiudades = function(){
+		return vehiculosSvc.getCiudades($scope.paisSelected).then(function(ciudades){
+			$scope.ciudades =ciudades;
+		});
+	};
+	$scope.cargarVehiculos = function(){
+		var ciudadSelect = document.getElementById('ciudadSelect');
+		var indiceSeleccionado = ciudadSelect.selectedIndex;
+		$scope.ciudad = ciudadSelect.options[indiceSeleccionado].value;
+		return vehiculosSvc.getVehiculos($scope.ciudad).then(function(vehiculos){
 			$scope.vehiculos =vehiculos;
 		});
-	};;
-	cargarVehiculos();
+	};
+	cargarClientes();
+	cargarPaises();
 })
 
 .controller('newReservaCtrl', function($scope, reservasSvc) {
