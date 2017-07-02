@@ -16,6 +16,7 @@ angular.module('webSiteReservasApp')
 	$scope.clientSelected;
 	$scope.paisSelected;
 	$scope.vehiculosSelected;
+	$scope.precioBase;
 	function cargarClientes(){
 		return vehiculosSvc.getClientes().then(function(clientes){
 			$scope.clientes =clientes;
@@ -39,6 +40,13 @@ angular.module('webSiteReservasApp')
 			$scope.vehiculos =vehiculos;
 		});
 	};
+	$scope.getPrecioVenta = function(){
+		$scope.precioBase = parseInt(document.getElementById('precioBase').value)
+		$scope.precioVenta = $scope.precioBase * 1.2
+		console.log($scope.precioBase);
+		console.log($scope.precioVenta);
+		return  $scope.precioVenta;
+	}
 	cargarClientes();
 	cargarPaises();
 })

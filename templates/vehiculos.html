@@ -50,7 +50,7 @@
 					<td>{{v.tipoCambio.value}}</td>
 					<td>{{v.tieneAireAcon}}</td>
 					<td>{{v.cantidadDisponible}}</td>
-					<td>{{v.preciopordia * 1.2}}</td>
+					<td ng-bind="getPrecioVenta()"><input type="hidden" id="precioBase" ng-value="{{v.precioPorDia}}"></td>
 					<td><a href="#" Reserva"><i class="glyphicon glyphicon-thumbs-up"></i></a></td>
 				</tr>
 			</tbody>
