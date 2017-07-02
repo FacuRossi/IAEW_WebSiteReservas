@@ -27,16 +27,33 @@
 				</div>
 			</div>
 		</div>
-		<div ng-if="ciudad != undefined">
-			<div class="form-group">
-				<label class="col-sm-2 control-label" for="vehiculoSelect"><h4>Vehiculos:</h4></label>
-				<div class="col-sm-5">
-					<select class="form-control" name="vehiculoSelect" id="vehiculoSelect" ng-model="vehiculoSelected">
-						<option ng-repeat="vehiculo in vehiculos"  value="{{vehiculo.vehiculoCiudadId}}">{{vehiculo.marca.value}}</option>
-					</select>	
-				</div>
-			</div>
-		</form>
+	</form>
+	<div ng-if="ciudad != undefined">
+		<table class="table table-hover table-responsive">
+			<thead>
+				<tr>
+					<th>Modelo</th>
+					<th>Marca</th>
+					<th>CantPuertas</th>
+					<th>Caja</th>
+					<th>Aire</th>
+					<th>Disponibles</th>
+					<th>Precio Venta</th>
+					<th>Reservar</th>
+				</tr>
+			</thead>
+			<tbody style="text-align: center;">
+				<tr ng-repeat="v in vehiculos">
+					<td>{{v.modelo.value}}</td>
+					<td>{{v.marca.value}}</td>
+					<td>{{v.cantidadPuertas}}</td>
+					<td>{{v.tipoCambio.value}}</td>
+					<td>{{v.tieneAireAcon}}</td>
+					<td>{{v.cantidadDisponible}}</td>
+					<td>{{v.preciopordia * 1.2}}</td>
+					<td><a href="#" Reserva"><i class="glyphicon glyphicon-thumbs-up"></i></a></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-
 </div>
