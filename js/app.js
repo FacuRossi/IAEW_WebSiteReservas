@@ -18,7 +18,7 @@ angular.module('webSiteReservasApp', ['ngRoute'])
             	templateUrl : 'templates/vehiculos.html',
             	controller  : 'vehiculosCtrl'
             })
-            .when('/newReserva', {
+            .when('/newReserva/:id/:modelo/:marca/:precioBase', {
                   templateUrl : 'templates/newReserva.html',
                   controller  : 'newReservaCtrl'
             });

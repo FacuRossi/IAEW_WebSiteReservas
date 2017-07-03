@@ -17,11 +17,7 @@ angular.module('webSiteReservasApp')
 	$scope.paisSelected;
 	$scope.vehiculosSelected;
 	$scope.precioBase;
-	function cargarClientes(){
-		return vehiculosSvc.getClientes().then(function(clientes){
-			$scope.clientes =clientes;
-		});
-	};
+
 	function cargarPaises(){
 		return vehiculosSvc.getPaises().then(function(paises){
 			$scope.paises =paises;
@@ -43,25 +39,50 @@ angular.module('webSiteReservasApp')
 	$scope.getPrecioVenta = function(){
 		$scope.precioBase = parseInt(document.getElementById('precioBase').value)
 		$scope.precioVenta = $scope.precioBase * 1.2
-		console.log($scope.precioBase);
-		console.log($scope.precioVenta);
 		return  $scope.precioVenta;
 	}
-	cargarClientes();
 	cargarPaises();
 })
 
-.controller('newReservaCtrl', function($scope, reservasSvc) {
-	function cargarVendedores(){
-		return reservasSvc.getVendedores().then(function(vendedores){
-			$scope.vendedores =vendedores;
-		});
-	};
+.controller('newReservaCtrl', function($scope, $routeParams, reservasSvc) {
+	$scope.idReserva = $routeParams.id;
+	$scope.modelo = $routeParams.modelo;
+	$scope.marca = $routeParams.marca;
+	$scope.precioBase = parseInt($routeParams.precioBase);
+	$scope.precioVenta = $scope.precioBase * 1.2;
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; 
+	var yyyy = today.getFullYear();
+	if(dd<10){
+		dd='0'+dd;
+	} 
+	if(mm<10){
+		mm='0'+mm;
+	} 
+	$scope.fecha = dd+'/'+mm+'/'+yyyy;
+
 	function cargarClientes(){
 		return reservasSvc.getClientes().then(function(clientes){
 			$scope.clientes =clientes;
 		});
 	};
+	function cargarVendedores(){
+		return reservasSvc.getVendedores().then(function(vendedores){
+			$scope.vendedores =vendedores;
+		});
+	};
+
+	$scope.registrarReserva = function(){
+		var clienteSelect = document.getElementById('clienteSelect');
+		var indiceSeleccionado = clienteSelect.selectedIndex;
+		$scope.cliente = clienteSelect.options[indiceSeleccionado].value;
+		var vendedorSelect = document.getElementById('vendedorSelect');
+		var indSeleccionado = vendedorSelect.selectedIndex;
+		$scope.vendedor = vendedorSelect.options[indSeleccionado].value;
+		reservasSvc.registrarReserva($scope.idReserva,$scope.precioBase,$scope.precioVenta,$scope.cliente,$scope.vendedor);
+	}
+
 	cargarClientes();
 	cargarVendedores();
 });

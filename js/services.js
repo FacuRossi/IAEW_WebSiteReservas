@@ -1,16 +1,10 @@
 angular.module('webSiteReservasApp')
 
 .service('vehiculosSvc', function($q, $http) {
-	var baseUrlGetClientes = 'http://localhost:8090/clientes';
 	var baseUrlGetPaises = 'http://localhost:8090/paises';
 	var baseUrlGetCiudades = 'http://localhost:8090/ciudades/';
 	var baseUrlGetVehiculos = 'http://localhost:8090/vehiculosDisp/';
 
-	this.getClientes = function() {
-		return $http.get(baseUrlGetClientes).then(function(respuesta) {
-			return respuesta.data;
-		});
-	};
 	this.getPaises = function() {
 		return $http.get(baseUrlGetPaises).then(function(respuesta) {
 			return respuesta.data;
@@ -47,4 +41,38 @@ angular.module('webSiteReservasApp')
 			return respuesta.data;
 		});
 	};
+
+	this.registrarReserva = function(id, pb,pv,idC,idV){
+		var f = new Date();
+		var data = {
+			codigoDeReserva:id,
+			cliente: {
+				id:idC,
+				nombre: "",  
+				apellido: "" 
+			},
+			vendedor: {
+				id:idV,
+				nombre: "",
+				apellido: ""
+			},
+			fechaDeReserva:f,
+			costo:pb,
+			precioVenta:pv
+		};
+		$http.get('http://localhost:8090/vendedores/'+idV).then(function(respuesta) {
+			data.vendedor["nombre"]= respuesta.data.nombre;
+			data.vendedor["apellido"]= respuesta.data.apellido;
+		});
+		$http.get('http://localhost:8090/clientes/'+idC).then(function(respuesta) {
+			data.cliente["nombre"]= respuesta.data.nombre;
+			data.cliente["apellido"]= respuesta.data.apellido;
+		});
+		var config = {
+			headers : {
+				'Content-Type': 'application/json'
+			}
+		}
+		$http.post(baseUrlGetReservas, data,config);
+	}
 });

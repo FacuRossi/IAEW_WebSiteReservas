@@ -2,14 +2,6 @@
 	<h1>Vehiculos Disponibles</h1>
 	<form class="form-horizontal">
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="clientSelect" ><h4>Clientes:</h4></label>
-			<div class="col-sm-5">	
-				<select class="form-control" name="clientSelect" id="clientSelect" ng-model="clientSelected">
-					<option ng-repeat="cliente in clientes"  value="{{cliente.id}}">{{cliente.nombre + " " + cliente.apellido}}</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
 			<label class="col-sm-2 control-label" for="paisSelect"><h4>Paises:</h4></label>
 			<div class="col-sm-5">
 				<select class="form-control" name="paisSelect" id="paisSelect" ng-model="paisSelected" ng-change="cargarCiudades()">
@@ -51,7 +43,7 @@
 					<td>{{v.tieneAireAcon}}</td>
 					<td>{{v.cantidadDisponible}}</td>
 					<td ng-bind="getPrecioVenta()"><input type="hidden" id="precioBase" ng-value="{{v.precioPorDia}}"></td>
-					<td><a href="#" Reserva"><i class="glyphicon glyphicon-thumbs-up"></i></a></td>
+					<td><a href="#newReserva/{{v.vehiculoCiudadId}}/{{v.modelo.value}}/{{v.marca.value}}/{{v.precioPorDia}}" Reserva"><i class="glyphicon glyphicon-thumbs-up"></i></a></td>
 				</tr>
 			</tbody>
 		</table>
