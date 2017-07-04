@@ -60,6 +60,13 @@ angular.module('webSiteReservasApp')
 			costo:pb,
 			precioVenta:pv
 		};
+		var dataSoap = {
+			IdVehiculoCiudad:id,
+			apellidoNombreCliente:'',
+			nroDocumentoCliente:'',
+			lugarDevolucion:'TerminalBuses',
+			lugarRetiro:'TerminalBuses'
+		};
 		$http.get('http://localhost:8090/vendedores/'+idV).then(function(respuesta) {
 			data.vendedor["nombre"]= respuesta.data.nombre;
 			data.vendedor["apellido"]= respuesta.data.apellido;
@@ -67,6 +74,8 @@ angular.module('webSiteReservasApp')
 		$http.get('http://localhost:8090/clientes/'+idC).then(function(respuesta) {
 			data.cliente["nombre"]= respuesta.data.nombre;
 			data.cliente["apellido"]= respuesta.data.apellido;
+			dataSoap["apellidoNombreCliente"] =respuesta.data.apellido + ' ' + respuesta.data.nombre;
+			dataSoap["nroDocumentoCliente"]=respuesta.data.dni;
 		});
 		var config = {
 			headers : {
@@ -74,5 +83,7 @@ angular.module('webSiteReservasApp')
 			}
 		}
 		$http.post(baseUrlGetReservas, data,config);
+		// console.log(dataSoap);
+		// $http.post('http://localhost:8090/reservaSoap',dataSoap,config);
 	}
 });
