@@ -42,7 +42,7 @@ angular.module('webSiteReservasApp')
 		});
 	};
 
-	this.cancelarReserva = function(codigoDeReserva){
+	this.cancelarReserva = function(codigoDeReserva,id){
 		var config = {
 			headers : {
 				'Content-Type': 'application/json'
@@ -65,8 +65,7 @@ angular.module('webSiteReservasApp')
 			precioVenta:'',
 			estado:'DESACTIVADA'
 		};
-		console.log(codigoDeReserva);
-		$http.put('http://localhost:8090/reservas/'+codigoDeReserva,data,config);
+		$http.put('http://localhost:8090/reservas/'+codigoDeReserva+'/'+id,data,config);
 	}
 
 	this.registrarReserva = function(id, pb,pv,idC,idV){
@@ -102,8 +101,8 @@ angular.module('webSiteReservasApp')
 		$http.get('http://localhost:8090/clientes/'+idC).then(function(respuesta) {
 			data.cliente["nombre"]= respuesta.data.nombre;
 			data.cliente["apellido"]= respuesta.data.apellido;
-			dataSoap["apellidoNombreCliente"] =respuesta.data.apellido + ' ' + respuesta.data.nombre;
-			dataSoap["nroDocumentoCliente"]=respuesta.data.dni;
+			dataSoap["apellidoNombreCliente"] = respuesta.data.apellido + ' ' + respuesta.data.nombre;
+			dataSoap["nroDocumentoCliente"] = respuesta.data.dni;
 		});
 		var config = {
 			headers : {
@@ -111,7 +110,11 @@ angular.module('webSiteReservasApp')
 			}
 		}
 		$http.post(baseUrlGetReservas, data,config);
-		// console.log(dataSoap);
-		// $http.post('http://localhost:8090/reservaSoap',dataSoap,config);
+		// console.log(data);
+		// console.log(dataSoap.apellidoNombreCliente);
+		// console.log(dataSoap.nroDocumentoCliente);
+		// var dataEmpty = {};
+		// var uri = 'http://localhost:8090/reservaSoap/' + dataSoap.apellidoNombreCliente + '/' + dataSoap.nroDocumentoCliente + '/' + id ;
+		// $http.post(uri,dataEmpty,config);
 	}
 });

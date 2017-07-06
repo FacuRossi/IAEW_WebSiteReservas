@@ -10,8 +10,8 @@ angular.module('webSiteReservasApp')
 		});
 	};
 
-	$scope.cancelarReserva = function (codigoDeReserva){
-		reservasSvc.cancelarReserva(codigoDeReserva);
+	$scope.cancelarReserva = function (codigoDeReserva,id){
+		reservasSvc.cancelarReserva(codigoDeReserva,id);
 		cargarReservas();
 		window.location.reload()
 	}
