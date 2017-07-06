@@ -1,7 +1,9 @@
 // 'use strict';
 
 const express = require('express');
+var cors = require('cors')
 const app = express();
+app.use(cors());
 
 var credentials = {
   client: {
@@ -30,8 +32,13 @@ app.get('/auth', function (req, res) {
 
 app.get('/callback', (req, res) => {
   const code = req.query.code;
+  console.log(code);
   const options = {
     code,
+    client: {
+      id: 'TPI_GrupoNro4',
+      secret: 'pass12345' 
+    },
     redirect_uri: 'http://localhost:3000/callback'
   };
 

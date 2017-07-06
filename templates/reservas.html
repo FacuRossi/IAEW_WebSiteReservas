@@ -8,6 +8,8 @@
 				<th>Vendedor</th>
 				<th>Precio</th>
 				<th>Codigo</th>
+				<th>Estado</th>
+				<th>Cancelar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,7 +19,8 @@
 				<td>{{reserva.vendedor.nombre + " " + reserva.vendedor.apellido}}</td>
 				<td>{{reserva.precioVenta}}</td>
 				<td>{{reserva.codigoDeReserva}}</td>
-				<td><a href="#" Reserva"><i class="glyphicon glyphicon-remove"></i></a></td>
+				<td>{{reserva.estado}}</td>
+				<td><a href="#reservas" ng-click="cancelarReserva(reserva.codigoDeReserva)" Reserva"><i class="glyphicon glyphicon-remove"></i></a></td>
 			</tr>
 		</tbody>
 	</table>

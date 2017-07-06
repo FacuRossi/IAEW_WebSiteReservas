@@ -42,6 +42,33 @@ angular.module('webSiteReservasApp')
 		});
 	};
 
+	this.cancelarReserva = function(codigoDeReserva){
+		var config = {
+			headers : {
+				'Content-Type': 'application/json'
+			}
+		};
+		var data = {
+			codigoDeReserva:'',
+			cliente: {
+				id:'',
+				nombre: "",  
+				apellido: "" 
+			},
+			vendedor: {
+				id:'',
+				nombre: "",
+				apellido: ""
+			},
+			fechaDeReserva:'',
+			costo:'',
+			precioVenta:'',
+			estado:'DESACTIVADA'
+		};
+		console.log(codigoDeReserva);
+		$http.put('http://localhost:8090/reservas/'+codigoDeReserva,data,config);
+	}
+
 	this.registrarReserva = function(id, pb,pv,idC,idV){
 		var f = new Date();
 		var data = {
@@ -58,7 +85,8 @@ angular.module('webSiteReservasApp')
 			},
 			fechaDeReserva:f,
 			costo:pb,
-			precioVenta:pv
+			precioVenta:pv,
+			estado:'ACTIVA'
 		};
 		var dataSoap = {
 			IdVehiculoCiudad:id,
